@@ -47,19 +47,6 @@ function Home() {
   const [isOptionalChecked, setIsOptionalChecked] = useState(false);
   const [optionalSumInsuredList, setoptionalSumInsuredList] = useState([]);
 
-  useEffect(() => {
-    switch (formData.productCode) {
-      case "1":
-        setSumInsuredList(sumInsuredListProduct1);
-        break;
-      case "2":
-        setSumInsuredList(sumInsuredListProduct2);
-        break;
-      default:
-        setSumInsuredList([]);
-    }
-  });
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -75,6 +62,16 @@ function Home() {
     });
     setErrorClass("secondary-light");
     setErrorMessage(null);
+    switch (formData.productCode) {
+      case "1":
+        setSumInsuredList(sumInsuredListProduct1);
+        break;
+      case "2":
+        setSumInsuredList(sumInsuredListProduct2);
+        break;
+      default:
+        setSumInsuredList([]);
+    }
   }, [formData.productCode]);
 
   const validateAge = (e) => {
