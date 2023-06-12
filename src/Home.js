@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import WomenCare from "./womenCare";
 const initialFormData = {
-  productCode: "",
+  productCode: "1",
   productName: "",
   policyType: "Individual",
   adultCount: 1,
@@ -16,9 +17,28 @@ const initialFormData = {
 };
 
 function Home() {
+  const [premium, setPremium] = useState(null);
   const [formData, setFormData] = useState(initialFormData);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await fetch("http://139.59.95.35:8081/premium", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPremium(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="shadow  bg-light bg-gradient m-md-5 border rounded d-block ">
@@ -55,6 +75,17 @@ function Home() {
           </select>
         </div>
       </div>
+      {formData.productCode === "1" && (
+        <WomenCare
+          submit={handleSubmit}
+          change={handleChange}
+          formData={formData}
+        />
+      )}
+      {/* {formData.productCode === "2" && <WomenCare />}
+      {formData.productCode === "3" && <WomenCare />}
+      {formData.productCode === "4" && <WomenCare />}
+      {formData.productCode === "5" && <WomenCare />} */}
     </div>
   );
 }
