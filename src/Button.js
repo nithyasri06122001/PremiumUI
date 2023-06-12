@@ -1,9 +1,9 @@
 import React from "react";
 
-function Button() {
+function Button({ type }) {
   return (
     <div className="m-3 text-center">
-      <button className="btn btn-primary pe-3 ps-3" type="submit">
+      <button className="btn btn-primary pe-3 ps-3" type={type}>
         Get Quote
       </button>
     </div>

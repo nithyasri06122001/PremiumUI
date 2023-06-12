@@ -107,7 +107,7 @@ function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch("http://139.59.95.35:8081/premium", {
+    await fetch("http://localhost:8081/premium", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -164,7 +164,7 @@ function Home() {
           name="productCode"
           value={formData.productCode}
         />
-        <form>
+        <form onSubmit={handleSubmit}>
           <Select
             labelName="Policy Type"
             formData={formData}
@@ -251,8 +251,27 @@ function Home() {
             value={formData.paymentPlan}
             optionList={paymentPlanList}
           />
-          <Button />
+          <Button type="submit" />
         </form>
+        <div className="d-flex w-80 text-center justify-content-around">
+          {premium
+            ? Object.keys(premium).map((key) => {
+                return (
+                  <div className="mt-5" key={key}>
+                    {formData.productCode === "4" ? (
+                      <p className="text-secondary">Premium</p>
+                    ) : (
+                      <p className="text-secondary">{key} YEAR</p>
+                    )}
+
+                    <p className="border border-3 border-primary rounded p-2 text-center">
+                      ₹ {premium[key]}
+                    </p>
+                  </div>
+                );
+              })
+            : null}
+        </div>
       </div>
     </div>
   );
