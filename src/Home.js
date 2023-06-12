@@ -18,6 +18,9 @@ const initialFormData = {
   policyDays: "",
 };
 
+const productList = { 1: "Women Care", 2: "Star Comprehensive" };
+const policyTypeList = ["Individual", "Floater"];
+
 function Home() {
   const [premium, setPremium] = useState(null);
   const [formData, setFormData] = useState(initialFormData);
@@ -90,6 +93,12 @@ function Home() {
     <div className="shadow  bg-light bg-gradient m-md-5 border rounded d-block ">
       <div className="row m-3">
         <p className="col-md">Quick Quote</p>
+        <Select
+          labelName="product"
+          formData={formData}
+          change={handleChange}
+          optionList={productList}
+        />
 
         <Age
           errorClass={errorClass}
