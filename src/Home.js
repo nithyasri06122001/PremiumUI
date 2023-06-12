@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import WomenCare from "./womenCare";
 import Select from "./Select";
 import Age from "./Age";
+import Button from "./Button";
 const initialFormData = {
   productCode: "",
   productName: "",
@@ -48,7 +49,7 @@ function Home() {
       default:
         setSumInsuredList([]);
     }
-  });
+  }, [formData.productCode]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -125,62 +126,65 @@ function Home() {
           name="productCode"
           value={formData.productCode}
         />
-
-        <Select
-          labelName="Policy Type"
-          formData={formData}
-          change={handleChange}
-          optionList={policyTypeList}
-          name="policyType"
-          value={formData.policyType}
-        />
-        {formData.policyType === "Floater" && (
+        <form onSubmit={handleSubmit}>
           <Select
-            labelName="No Of Adults"
+            labelName="Policy Type"
             formData={formData}
             change={handleChange}
-            name="adultCount"
-            value={formData.adultCount}
-            optionList={adultCountList}
+            optionList={policyTypeList}
+            name="policyType"
+            value={formData.policyType}
           />
-        )}
-        {formData.policyType === "Floater" &&
-          (formData.adultCount === "1" ? (
+          {formData.policyType === "Floater" && (
             <Select
-              labelName="No Of Child"
+              labelName="No Of Adults"
               formData={formData}
               change={handleChange}
-              name="childCount"
-              value={formData.childCount}
-              optionList={childCountList1}
+              name="adultCount"
+              value={formData.adultCount}
+              optionList={adultCountList}
             />
-          ) : (
-            <Select
-              labelName="No Of Child"
-              formData={formData}
-              change={handleChange}
-              name="childCount"
-              value={formData.childCount}
-              optionList={childCountList2}
-            />
-          ))}
+          )}
+          {formData.policyType === "Floater" &&
+            (formData.adultCount === "1" ? (
+              <Select
+                labelName="No Of Child"
+                formData={formData}
+                change={handleChange}
+                name="childCount"
+                value={formData.childCount}
+                optionList={childCountList1}
+              />
+            ) : (
+              <Select
+                labelName="No Of Child"
+                formData={formData}
+                change={handleChange}
+                name="childCount"
+                value={formData.childCount}
+                optionList={childCountList2}
+              />
+            ))}
 
-        <Select
-          labelName="sum Insured"
-          formData={formData}
-          change={handleChange}
-          name="sumInsured"
-          value={formData.sumInsured}
-          optionList={sumInsuredList}
-        />
+          <Select
+            labelName="sum Insured"
+            formData={formData}
+            change={handleChange}
+            name="sumInsured"
+            value={formData.sumInsured}
+            optionList={sumInsuredList}
+          />
 
-        <Age
-          errorClass={errorClass}
-          errorMessage={errorMessage}
-          formData={formData}
-          validateAge={validateAge}
-          change={handleChange}
-        />
+          <Age
+            errorClass={errorClass}
+            errorMessage={errorMessage}
+            formData={formData}
+            validateAge={validateAge}
+            change={handleChange}
+          />
+
+          <Button />
+        </form>
       </div>
     </div>
   );
