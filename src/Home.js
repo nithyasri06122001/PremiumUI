@@ -257,7 +257,10 @@ function Home() {
             name="policyType"
             value={formData.policyType}
           />
-          {formData.policyType === "Floater" && (
+          {((formData.policyType === "Floater" &&
+            formData.productCode !== "3") ||
+            (formData.productCode === "3" &&
+              formData.policyType === "Individual")) && (
             <Select
               labelName={adultLabel}
               formData={formData}
@@ -267,7 +270,20 @@ function Home() {
               optionList={adultCountList}
             />
           )}
+          {formData.productCode === "3" &&
+            formData.policyType === "Floater" && (
+              <Select
+                labelName={adultLabel}
+                formData={formData}
+                change={handleChange}
+                name="adultCount"
+                value={formData.adultCount}
+                optionList={[2]}
+              />
+            )}
+
           {formData.policyType === "Floater" &&
+            formData.productCode !== "3" &&
             (formData.adultCount === "1" ? (
               <Select
                 labelName="No Of Child"
