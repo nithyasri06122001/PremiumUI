@@ -1,13 +1,7 @@
 import React from "react";
 
-const CheckBox = ({ isOptionalChecked, handleOptionalCheck }) => {
-  return (
-    <input
-      type="checkbox"
-      checked={isOptionalChecked}
-      onChange={handleOptionalCheck}
-    />
-  );
+const CheckBox = ({ checked, handle }) => {
+  return <input type="checkbox" checked={checked} onChange={handle} />;
 };
 
 export default CheckBox;

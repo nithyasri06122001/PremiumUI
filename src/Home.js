@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import WomenCare from "./womenCare";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Select from "./Select";
 import Age from "./Age";
 import CheckBox from "./CheckBox";
@@ -20,7 +21,13 @@ const initialFormData = {
   policyDays: "",
 };
 
-const productList = { 1: "Women Care", 2: "Star Comprehensive" };
+const productList = {
+  1: "Women Care",
+  2: "Star Comprehensive",
+  3: "Senior Citizen's Red Carpet",
+  4: "Star Micro Rural and Farmers Care",
+  5: "Star Hospital Cash",
+};
 const policyTypeList = ["Individual", "Floater"];
 const adultCountList = [1, 2];
 const childCountList1 = [1, 2, 3];
@@ -29,8 +36,10 @@ const sumInsuredListProduct1 = [
   500000, 1000000, 1500000, 2000000, 2500000, 5000000, 10000000,
 ];
 const sumInsuredListProduct2 = [
-  500000, 7500000, 1000000, 1500000, 2000000, 2500000, 5000000, 10000000,
+  500000, 750000, 1000000, 1500000, 2000000, 2500000, 5000000, 7500000,
+  10000000,
 ];
+
 const paymentPlanList = [
   "Full Payment",
   "Half-Yearly EMI Plan",
@@ -46,6 +55,7 @@ function Home() {
   const [isChecked, setIsChecked] = useState(false);
   const [isOptionalChecked, setIsOptionalChecked] = useState(false);
   const [optionalSumInsuredList, setoptionalSumInsuredList] = useState([]);
+  const [adultLabel, setAdultLabel] = useState("No of Adult");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -71,6 +81,12 @@ function Home() {
         break;
       default:
         setSumInsuredList([]);
+    }
+    if (formData.productCode === "3") {
+      setAdultLabel("No of Senior Citizens");
+    }
+    if (formData.productCode !== "3") {
+      setAdultLabel("No of Adult");
     }
   }, [formData.productCode]);
 
@@ -104,6 +120,47 @@ function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (formData.productCode === "") {
+      return toast.error("Select any product");
+    }
+    if (formData.age === "") {
+      return toast.error("Enter age");
+    }
+    if (
+      formData.policyType === "Floater" &&
+      formData.childCount === "" &&
+      formData.productCode != "3"
+    ) {
+      return toast.error("Select child count");
+    }
+    // if (
+    //   formData.productCode === "3" &&
+    //   formData.policyType === "Floater" &&
+    //   formData.adultCount !== "2"
+    // ) {
+    //   return toast.error("Enter a valid No of senior count");
+    // }
+
+    if (formData.productCode === "5") {
+      if (formData.policyPlan === "") {
+        return toast.error("Select your plan type");
+      }
+      if (formData.policyDays === "") {
+        return toast.error("Select policy days");
+      }
+    }
+
+    if (!(formData.sumInsured > 0)) {
+      return toast.error("Enter valid Sum Insured");
+    }
+    if (
+      isOptionalChecked &&
+      formData.optionalSumInsured === "" &&
+      formData.productCode === "1"
+    ) {
+      return toast.error("Select Lumpsum cover");
+    }
     await fetch("http://localhost:8081/premium", {
       method: "POST",
       headers: {
@@ -149,6 +206,36 @@ function Home() {
     setoptionalSumInsuredList(optionalSum);
   }, [formData.sumInsured, isOptionalChecked]);
 
+  useEffect(() => {
+    if (formData.policyType === "Individual") {
+      setFormData({
+        ...formData,
+        sumInsured: "",
+        adultCount: "1",
+        childCount: "",
+      });
+    }
+    if (formData.policyType === "Floater") {
+      setFormData({
+        ...formData,
+        sumInsured: "",
+      });
+    }
+  }, [formData.policyType]);
+
+  useEffect(() => {
+    if (formData.productCode === "1") {
+      setFormData({ ...formData, optionalSumInsured: "" });
+    }
+
+    if (formData.productCode === "3" && formData.policyType === "Floater") {
+      setFormData({
+        ...formData,
+        adultCount: 2,
+      });
+    }
+  }, [formData.sumInsured]);
+
   return (
     <div className="shadow  bg-light bg-gradient m-md-5 border rounded d-block ">
       <div className="row m-3">
@@ -172,7 +259,7 @@ function Home() {
           />
           {formData.policyType === "Floater" && (
             <Select
-              labelName="No Of Adults"
+              labelName={adultLabel}
               formData={formData}
               change={handleChange}
               name="adultCount"
@@ -209,7 +296,7 @@ function Home() {
             change={handleChange}
           />
           <Select
-            labelName="sum Insured"
+            labelName="Sum Insured"
             formData={formData}
             change={handleChange}
             name="sumInsured"
@@ -220,13 +307,33 @@ function Home() {
             <div className="col-md-12">
               <div className="d-flex gap-2">
                 <CheckBox
-                  isOptionalChecked={isOptionalChecked}
-                  handleOptionalCheck={handleOptionalCheck}
+                  checked={isOptionalChecked}
+                  handle={handleOptionalCheck}
                 />
                 <p className="mt-3">
                   Do you want optional cover? - Lump sum on diagnosis of cancer
                 </p>
               </div>
+            </div>
+          )}
+          {formData.productCode === "2" && formData.sumInsured >= 1000000 && (
+            <div className="col-lg-12">
+              <p>Do you want STAR EXTRA PROTECT ?</p>
+              <div className="d-flex gap-2">
+                <CheckBox checked={isChecked} handle={handleCheck} />
+                <p className="mt-3">SECTION 1</p>
+              </div>
+              <p>1. Enhanced Room Rent</p>
+
+              <p>2. Claim Guard (Consumables cover)</p>
+
+              <p>3. Enhanced Limit for Modern Treatments</p>
+
+              <p>4. Enhanced Limit for Ayush Treatment</p>
+
+              <p>5. Home care treatment</p>
+
+              <p>6. Bonus Guard</p>
             </div>
           )}
           {formData.productCode === "1" && isOptionalChecked && (
@@ -269,6 +376,7 @@ function Home() {
               })
             : null}
         </div>
+        <ToastContainer />
       </div>
     </div>
   );
