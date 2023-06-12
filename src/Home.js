@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WomenCare from "./womenCare";
 import Select from "./Select";
+import Age from "./Age";
 const initialFormData = {
   productCode: "",
   productName: "",
@@ -89,7 +90,14 @@ function Home() {
     <div className="shadow  bg-light bg-gradient m-md-5 border rounded d-block ">
       <div className="row m-3">
         <p className="col-md">Quick Quote</p>
-        <Select labelName="Product" />
+
+        <Age
+          errorClass={errorClass}
+          errorMessage={errorMessage}
+          formData={formData}
+          validateAge={validateAge}
+          change={handleChange}
+        />
       </div>
     </div>
   );
