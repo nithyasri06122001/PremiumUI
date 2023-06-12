@@ -32,6 +32,70 @@ function WomenCare({
               </option>
             </select>
           </div>
+
+          {formData.policyType === "Floater" && (
+            <div className="col-lg-5 d-flex">
+              <label className="text-nowrap col-md-5 text-center p-md-2 bg-primary text-white border border-info rounded">
+                No of Adult
+              </label>
+
+              <select
+                className="form-select"
+                name="adultCount"
+                value={formData.adultCount}
+                onChange={change}
+              >
+                {!(
+                  formData.productCode === "3" &&
+                  formData.policyType === "Floater"
+                ) && (
+                  <option type="number" value="1">
+                    1
+                  </option>
+                )}
+                <option type="number" value="2">
+                  2
+                </option>
+              </select>
+            </div>
+          )}
+          {formData.policyType === "Floater" &&
+            formData.productCode !== "3" && (
+              <div className="col-lg-5 d-flex">
+                <label className="text-nowrap col-md-5 text-center p-md-2 bg-primary text-white border border-info rounded">
+                  No of Child
+                </label>
+                <select
+                  className="form-select"
+                  name="childCount"
+                  value={formData.childCount}
+                  onChange={change}
+                >
+                  <option value="" selected disabled hidden>
+                    Select Child Count
+                  </option>
+
+                  {formData.adultCount > 1 && (
+                    <option type="number" value="0">
+                      0
+                    </option>
+                  )}
+
+                  <option type="number" value="1">
+                    1
+                  </option>
+                  <option type="number" value="2">
+                    2
+                  </option>
+                  {formData.productCode !== "4" && (
+                    <option type="number" value="3">
+                      3
+                    </option>
+                  )}
+                </select>
+              </div>
+            )}
+
           <div className="d-flex col-md-5 position-relative">
             <label className="text-nowrap  col-lg-5 text-center p-2 bg-primary text-white border border-info rounded">
               Age

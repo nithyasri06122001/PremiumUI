@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WomenCare from "./womenCare";
 const initialFormData = {
-  productCode: "1",
+  productCode: "",
   productName: "",
   policyType: "Individual",
   adultCount: 1,
