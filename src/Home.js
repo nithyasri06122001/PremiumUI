@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import WomenCare from "./womenCare";
 import Select from "./Select";
 import Age from "./Age";
-import Button from "./Button";
 import CheckBox from "./CheckBox";
 const initialFormData = {
   productCode: "",
@@ -58,7 +57,7 @@ function Home() {
       default:
         setSumInsuredList([]);
     }
-  }, [formData.productCode]);
+  });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -164,64 +163,86 @@ function Home() {
           name="productCode"
           value={formData.productCode}
         />
-        <form onSubmit={handleSubmit}>
+
+        <Select
+          labelName="Policy Type"
+          formData={formData}
+          change={handleChange}
+          optionList={policyTypeList}
+          name="policyType"
+          value={formData.policyType}
+        />
+        {formData.policyType === "Floater" && (
           <Select
-            labelName="Policy Type"
+            labelName="No Of Adults"
             formData={formData}
             change={handleChange}
-            optionList={policyTypeList}
-            name="policyType"
-            value={formData.policyType}
+            name="adultCount"
+            value={formData.adultCount}
+            optionList={adultCountList}
           />
-          {formData.policyType === "Floater" && (
+        )}
+        {formData.policyType === "Floater" &&
+          (formData.adultCount === "1" ? (
             <Select
-              labelName="No Of Adults"
+              labelName="No Of Child"
               formData={formData}
               change={handleChange}
-              name="adultCount"
-              value={formData.adultCount}
-              optionList={adultCountList}
+              name="childCount"
+              value={formData.childCount}
+              optionList={childCountList1}
             />
-          )}
-          {formData.policyType === "Floater" &&
-            (formData.adultCount === "1" ? (
-              <Select
-                labelName="No Of Child"
-                formData={formData}
-                change={handleChange}
-                name="childCount"
-                value={formData.childCount}
-                optionList={childCountList1}
-              />
-            ) : (
-              <Select
-                labelName="No Of Child"
-                formData={formData}
-                change={handleChange}
-                name="childCount"
-                value={formData.childCount}
-                optionList={childCountList2}
-              />
-            ))}
+          ) : (
+            <Select
+              labelName="No Of Child"
+              formData={formData}
+              change={handleChange}
+              name="childCount"
+              value={formData.childCount}
+              optionList={childCountList2}
+            />
+          ))}
 
+        <Age
+          errorClass={errorClass}
+          errorMessage={errorMessage}
+          formData={formData}
+          validateAge={validateAge}
+          change={handleChange}
+        />
+        <Select
+          labelName="sum Insured"
+          formData={formData}
+          change={handleChange}
+          name="sumInsured"
+          value={formData.sumInsured}
+          optionList={sumInsuredList}
+        />
+        {formData.productCode === "1" && (
+          <CheckBox
+            isOptionalChecked={isOptionalChecked}
+            handleOptionalCheck={handleOptionalCheck}
+          />
+        )}
+        {formData.productCode === "1" && isOptionalChecked && (
           <Select
-            labelName="sum Insured"
+            labelName="Lumpsum Cover"
             formData={formData}
             change={handleChange}
-            name="sumInsured"
-            value={formData.sumInsured}
-            optionList={sumInsuredList}
+            name="optionalSumInsured"
+            value={formData.optionalSumInsured}
+            optionList={optionalSumInsuredList}
           />
+        )}
 
-          <Age
-            errorClass={errorClass}
-            errorMessage={errorMessage}
-            formData={formData}
-            validateAge={validateAge}
-            change={handleChange}
-          />
-          <Button />
-        </form>
+        <Select
+          labelName="Payment Method"
+          formData={formData}
+          change={handleChange}
+          name="paymentPlan"
+          value={formData.paymentPlan}
+          optionList={paymentPlanList}
+        />
       </div>
     </div>
   );
