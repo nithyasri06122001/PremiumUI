@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import WomenCare from "./womenCare";
 import Select from "./Select";
 import Age from "./Age";
+import CheckBox from "./CheckBox";
 const initialFormData = {
   productCode: "",
   productName: "",
@@ -29,6 +30,11 @@ const sumInsuredListProduct1 = [
 const sumInsuredListProduct2 = [
   500000, 7500000, 1000000, 1500000, 2000000, 2500000, 5000000, 10000000,
 ];
+const paymentPlanList = [
+  "Full Payment",
+  "Half-Yearly EMI Plan",
+  "Quarterly EMI Plan",
+];
 
 function Home() {
   const [premium, setPremium] = useState(null);
@@ -36,6 +42,9 @@ function Home() {
   const [errorClass, setErrorClass] = useState("secondary-light");
   const [errorMessage, setErrorMessage] = useState(null);
   const [sumInsuredList, setSumInsuredList] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isOptionalChecked, setIsOptionalChecked] = useState(false);
+  const [optionalSumInsuredList, setoptionalSumInsuredList] = useState([]);
 
   useEffect(() => {
     switch (formData.productCode) {
@@ -113,6 +122,35 @@ function Home() {
       });
   };
 
+  const handleCheck = () => {
+    setIsChecked(!isChecked);
+  };
+  const handleOptionalCheck = () => {
+    setIsOptionalChecked(!isOptionalChecked);
+  };
+  useEffect(() => {
+    if (isOptionalChecked) {
+      setFormData({ ...formData, optionalCover: "Yes" });
+    } else if (!isOptionalChecked) {
+      setFormData({ ...formData, optionalCover: "No", optionalSumInsured: "" });
+    }
+  }, [isOptionalChecked]);
+
+  useEffect(() => {
+    if (isChecked) {
+      setFormData({ ...formData, starExtraProtect: "Yes" });
+    } else if (!isChecked) {
+      setFormData({ ...formData, starExtraProtect: "No" });
+    }
+  }, [isChecked]);
+
+  useEffect(() => {
+    let optionalSum = sumInsuredListProduct1.filter((item) => {
+      return item <= formData.sumInsured && item < 5000000;
+    });
+    setoptionalSumInsuredList(optionalSum);
+  }, [formData.sumInsured, isOptionalChecked]);
+
   return (
     <div className="shadow  bg-light bg-gradient m-md-5 border rounded d-block ">
       <div className="row m-3">
@@ -165,6 +203,13 @@ function Home() {
             />
           ))}
 
+        <Age
+          errorClass={errorClass}
+          errorMessage={errorMessage}
+          formData={formData}
+          validateAge={validateAge}
+          change={handleChange}
+        />
         <Select
           labelName="sum Insured"
           formData={formData}
@@ -173,13 +218,30 @@ function Home() {
           value={formData.sumInsured}
           optionList={sumInsuredList}
         />
+        {formData.productCode === "1" && (
+          <CheckBox
+            isOptionalChecked={isOptionalChecked}
+            handleOptionalCheck={handleOptionalCheck}
+          />
+        )}
+        {formData.productCode === "1" && isOptionalChecked && (
+          <Select
+            labelName="Lumpsum Cover"
+            formData={formData}
+            change={handleChange}
+            name="optionalSumInsured"
+            value={formData.optionalSumInsured}
+            optionList={optionalSumInsuredList}
+          />
+        )}
 
-        <Age
-          errorClass={errorClass}
-          errorMessage={errorMessage}
+        <Select
+          labelName="Payment Method"
           formData={formData}
-          validateAge={validateAge}
           change={handleChange}
+          name="paymentPlan"
+          value={formData.paymentPlan}
+          optionList={paymentPlanList}
         />
       </div>
     </div>
