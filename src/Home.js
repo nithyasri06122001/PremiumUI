@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import WomenCare from "./womenCare";
+import WomenCare from "./WomenCare";
 const initialFormData = {
   productCode: "1",
   productName: "",
