@@ -39,6 +39,9 @@ const sumInsuredListProduct2 = [
   500000, 750000, 1000000, 1500000, 2000000, 2500000, 5000000, 7500000,
   10000000,
 ];
+const sumInsuredListProduct3 = [100000, 200000, 300000, 400000, 500000, 750000];
+
+const sumInsuredListProduct3F = [1000000, 1500000, 2000000, 2500000];
 
 const paymentPlanList = [
   "Full Payment",
@@ -79,6 +82,15 @@ function Home() {
       case "2":
         setSumInsuredList(sumInsuredListProduct2);
         break;
+      case "3":
+        if (formData.policyType === "Floater") {
+          setSumInsuredList(sumInsuredListProduct3F);
+          break;
+        } else {
+          setSumInsuredList(sumInsuredListProduct3);
+          break;
+        }
+
       default:
         setSumInsuredList([]);
     }
@@ -88,7 +100,7 @@ function Home() {
     if (formData.productCode !== "3") {
       setAdultLabel("No of Adult");
     }
-  }, [formData.productCode]);
+  }, [formData.productCode, formData.policyType]);
 
   const validateAge = (e) => {
     if (e.target.value === "") {
@@ -319,6 +331,7 @@ function Home() {
             value={formData.sumInsured}
             optionList={sumInsuredList}
           />
+
           {formData.productCode === "1" && (
             <div className="col-md-12">
               <div className="d-flex gap-2">
