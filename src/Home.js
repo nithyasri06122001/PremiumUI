@@ -220,10 +220,17 @@ function Home() {
             optionList={sumInsuredList}
           />
           {formData.productCode === "1" && (
-            <CheckBox
-              isOptionalChecked={isOptionalChecked}
-              handleOptionalCheck={handleOptionalCheck}
-            />
+            <div className="col-md-12">
+              <div className="d-flex gap-2">
+                <CheckBox
+                  isOptionalChecked={isOptionalChecked}
+                  handleOptionalCheck={handleOptionalCheck}
+                />
+                <p className="mt-3">
+                  Do you want optional cover? - Lump sum on diagnosis of cancer
+                </p>
+              </div>
+            </div>
           )}
           {formData.productCode === "1" && isOptionalChecked && (
             <Select
