@@ -3,6 +3,7 @@ import WomenCare from "./womenCare";
 import Select from "./Select";
 import Age from "./Age";
 import CheckBox from "./CheckBox";
+import Button from "./Button";
 const initialFormData = {
   productCode: "",
   productName: "",
@@ -163,86 +164,88 @@ function Home() {
           name="productCode"
           value={formData.productCode}
         />
-
-        <Select
-          labelName="Policy Type"
-          formData={formData}
-          change={handleChange}
-          optionList={policyTypeList}
-          name="policyType"
-          value={formData.policyType}
-        />
-        {formData.policyType === "Floater" && (
+        <form>
           <Select
-            labelName="No Of Adults"
+            labelName="Policy Type"
             formData={formData}
             change={handleChange}
-            name="adultCount"
-            value={formData.adultCount}
-            optionList={adultCountList}
+            optionList={policyTypeList}
+            name="policyType"
+            value={formData.policyType}
           />
-        )}
-        {formData.policyType === "Floater" &&
-          (formData.adultCount === "1" ? (
+          {formData.policyType === "Floater" && (
             <Select
-              labelName="No Of Child"
+              labelName="No Of Adults"
               formData={formData}
               change={handleChange}
-              name="childCount"
-              value={formData.childCount}
-              optionList={childCountList1}
+              name="adultCount"
+              value={formData.adultCount}
+              optionList={adultCountList}
             />
-          ) : (
-            <Select
-              labelName="No Of Child"
-              formData={formData}
-              change={handleChange}
-              name="childCount"
-              value={formData.childCount}
-              optionList={childCountList2}
-            />
-          ))}
+          )}
+          {formData.policyType === "Floater" &&
+            (formData.adultCount === "1" ? (
+              <Select
+                labelName="No Of Child"
+                formData={formData}
+                change={handleChange}
+                name="childCount"
+                value={formData.childCount}
+                optionList={childCountList1}
+              />
+            ) : (
+              <Select
+                labelName="No Of Child"
+                formData={formData}
+                change={handleChange}
+                name="childCount"
+                value={formData.childCount}
+                optionList={childCountList2}
+              />
+            ))}
 
-        <Age
-          errorClass={errorClass}
-          errorMessage={errorMessage}
-          formData={formData}
-          validateAge={validateAge}
-          change={handleChange}
-        />
-        <Select
-          labelName="sum Insured"
-          formData={formData}
-          change={handleChange}
-          name="sumInsured"
-          value={formData.sumInsured}
-          optionList={sumInsuredList}
-        />
-        {formData.productCode === "1" && (
-          <CheckBox
-            isOptionalChecked={isOptionalChecked}
-            handleOptionalCheck={handleOptionalCheck}
+          <Age
+            errorClass={errorClass}
+            errorMessage={errorMessage}
+            formData={formData}
+            validateAge={validateAge}
+            change={handleChange}
           />
-        )}
-        {formData.productCode === "1" && isOptionalChecked && (
           <Select
-            labelName="Lumpsum Cover"
+            labelName="sum Insured"
             formData={formData}
             change={handleChange}
-            name="optionalSumInsured"
-            value={formData.optionalSumInsured}
-            optionList={optionalSumInsuredList}
+            name="sumInsured"
+            value={formData.sumInsured}
+            optionList={sumInsuredList}
           />
-        )}
+          {formData.productCode === "1" && (
+            <CheckBox
+              isOptionalChecked={isOptionalChecked}
+              handleOptionalCheck={handleOptionalCheck}
+            />
+          )}
+          {formData.productCode === "1" && isOptionalChecked && (
+            <Select
+              labelName="Lumpsum Cover"
+              formData={formData}
+              change={handleChange}
+              name="optionalSumInsured"
+              value={formData.optionalSumInsured}
+              optionList={optionalSumInsuredList}
+            />
+          )}
 
-        <Select
-          labelName="Payment Method"
-          formData={formData}
-          change={handleChange}
-          name="paymentPlan"
-          value={formData.paymentPlan}
-          optionList={paymentPlanList}
-        />
+          <Select
+            labelName="Payment Method"
+            formData={formData}
+            change={handleChange}
+            name="paymentPlan"
+            value={formData.paymentPlan}
+            optionList={paymentPlanList}
+          />
+          <Button />
+        </form>
       </div>
     </div>
   );
