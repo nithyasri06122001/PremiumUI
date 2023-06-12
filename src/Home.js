@@ -94,10 +94,21 @@ function Home() {
       <div className="row m-3">
         <p className="col-md">Quick Quote</p>
         <Select
-          labelName="product"
+          labelName="Product"
           formData={formData}
           change={handleChange}
           optionList={productList}
+          name="productCode"
+          value={formData.productCode}
+        />
+
+        <Select
+          labelName="Policy Type"
+          formData={formData}
+          change={handleChange}
+          optionList={policyTypeList}
+          name="policyType"
+          value={formData.policyType}
         />
 
         <Age

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Select = ({ labelName, formData, change, optionList }) => {
+const Select = ({ labelName, formData, change, optionList, value, name }) => {
   console.log(formData);
   return (
     <div className="col-lg d-flex">
@@ -9,19 +9,21 @@ const Select = ({ labelName, formData, change, optionList }) => {
       </label>
       <select
         className="form-select "
-        name="productCode"
-        value={formData.productCode}
+        name={name}
+        value={value}
         onChange={change}
       >
         <option value="" selected disabled hidden>
           {`Select ${labelName}`}
         </option>
 
-        {labelName === "product" && optionList
+        {labelName === "Product" && optionList
           ? Object.keys(optionList).map((key) => {
               return <option value={key}>{optionList[key]}</option>;
             })
-          : null}
+          : optionList.map((option) => {
+              return <option value={option}>{option}</option>;
+            })}
       </select>
     </div>
   );
