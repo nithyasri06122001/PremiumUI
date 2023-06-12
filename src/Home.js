@@ -42,12 +42,18 @@ const sumInsuredListProduct2 = [
 const sumInsuredListProduct3 = [100000, 200000, 300000, 400000, 500000, 750000];
 
 const sumInsuredListProduct3F = [1000000, 1500000, 2000000, 2500000];
+const sumInsuredListProduct5 = [1000, 2000, 3000];
 
 const paymentPlanList = [
   "Full Payment",
   "Half-Yearly EMI Plan",
   "Quarterly EMI Plan",
 ];
+
+const policyPlanList = ["Basic Plan", "Enhanced Plan"];
+
+const hospitalPolicyDaysBasic = [30, 60, 90, 120, 180];
+const hospitalPolicyDaysEnhanced = [90, 120, 180];
 
 function Home() {
   const [premium, setPremium] = useState(null);
@@ -59,6 +65,20 @@ function Home() {
   const [isOptionalChecked, setIsOptionalChecked] = useState(false);
   const [optionalSumInsuredList, setoptionalSumInsuredList] = useState([]);
   const [adultLabel, setAdultLabel] = useState("No of Adult");
+  const [childCount, setChildCount] = useState([]);
+  const [policyDaysList, setPolicyDaysList] = useState([]);
+
+  useEffect(() => {
+    if (formData.productCode === "4" && formData.adultCount === "1") {
+      setChildCount([1, 2]);
+    } else if (formData.productCode === "4" && formData.adultCount === "2") {
+      setChildCount([0, 1, 2]);
+    } else if (formData.adultCount === "1") {
+      setChildCount(childCountList1);
+    } else if (formData.adultCount === "2") {
+      setChildCount(childCountList2);
+    }
+  }, [formData.adultCount]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -90,6 +110,17 @@ function Home() {
           setSumInsuredList(sumInsuredListProduct3);
           break;
         }
+      case "4":
+        if (formData.policyType === "Floater") {
+          setSumInsuredList([200000]);
+          break;
+        } else {
+          setSumInsuredList([100000]);
+          break;
+        }
+      case "5":
+        setSumInsuredList(sumInsuredListProduct5);
+        break;
 
       default:
         setSumInsuredList([]);
@@ -248,6 +279,14 @@ function Home() {
     }
   }, [formData.sumInsured]);
 
+  useEffect(() => {
+    if (formData.policyPlan === "Basic Plan") {
+      setPolicyDaysList(hospitalPolicyDaysBasic);
+    } else {
+      setPolicyDaysList(hospitalPolicyDaysEnhanced);
+    }
+  }, [formData.policyPlan]);
+
   return (
     <div className="shadow  bg-light bg-gradient m-md-5 border rounded d-block ">
       <div className="row m-3">
@@ -295,26 +334,16 @@ function Home() {
             )}
 
           {formData.policyType === "Floater" &&
-            formData.productCode !== "3" &&
-            (formData.adultCount === "1" ? (
+            formData.productCode !== "3" && (
               <Select
                 labelName="No Of Child"
                 formData={formData}
                 change={handleChange}
                 name="childCount"
                 value={formData.childCount}
-                optionList={childCountList1}
+                optionList={childCount}
               />
-            ) : (
-              <Select
-                labelName="No Of Child"
-                formData={formData}
-                change={handleChange}
-                name="childCount"
-                value={formData.childCount}
-                optionList={childCountList2}
-              />
-            ))}
+            )}
 
           <Age
             errorClass={errorClass}
@@ -323,6 +352,27 @@ function Home() {
             validateAge={validateAge}
             change={handleChange}
           />
+          {formData.productCode === "5" && (
+            <Select
+              labelName="Policy Plan"
+              formData={formData}
+              change={handleChange}
+              name="policyPlan"
+              value={formData.PolicyPlan}
+              optionList={policyPlanList}
+            />
+          )}
+          {formData.productCode === "5" && (
+            <Select
+              labelName="Policy Days"
+              formData={formData}
+              change={handleChange}
+              name="policyDays"
+              value={formData.policyDays}
+              optionList={policyDaysList}
+            />
+          )}
+
           <Select
             labelName="Sum Insured"
             formData={formData}
