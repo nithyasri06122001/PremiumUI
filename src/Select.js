@@ -3,8 +3,8 @@ import React from "react";
 const Select = ({ labelName, formData, change, optionList, value, name }) => {
   console.log(formData);
   return (
-    <div className="col-lg d-flex">
-      <label className="text-nowrap col-md-3 text-center p-2 bg-primary text-white border border-info rounded">
+    <div className="col-lg d-flex ">
+      <label className="text-nowrap col-md-3 text-center p-2  text-white border  rounded w-30 background_label">
         {labelName}
       </label>
       <select

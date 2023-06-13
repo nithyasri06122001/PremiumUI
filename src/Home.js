@@ -293,170 +293,175 @@ function Home() {
         <p className="col-md">Quick Quote</p>
         <Select
           labelName="Product"
+          className="row m-3"
           formData={formData}
           change={handleChange}
           optionList={productList}
           name="productCode"
           value={formData.productCode}
         />
-        <form onSubmit={handleSubmit}>
-          <Select
-            labelName="Policy Type"
-            formData={formData}
-            change={handleChange}
-            optionList={policyTypeList}
-            name="policyType"
-            value={formData.policyType}
-          />
-          {((formData.policyType === "Floater" &&
-            formData.productCode !== "3") ||
-            (formData.productCode === "3" &&
-              formData.policyType === "Individual")) && (
-            <Select
-              labelName={adultLabel}
-              formData={formData}
-              change={handleChange}
-              name="adultCount"
-              value={formData.adultCount}
-              optionList={adultCountList}
-            />
-          )}
-          {formData.productCode === "3" &&
-            formData.policyType === "Floater" && (
-              <Select
-                labelName={adultLabel}
-                formData={formData}
-                change={handleChange}
-                name="adultCount"
-                value={formData.adultCount}
-                optionList={[2]}
-              />
-            )}
-
-          {formData.policyType === "Floater" &&
-            formData.productCode !== "3" && (
-              <Select
-                labelName="No Of Child"
-                formData={formData}
-                change={handleChange}
-                name="childCount"
-                value={formData.childCount}
-                optionList={childCount}
-              />
-            )}
-
-          <Age
-            errorClass={errorClass}
-            errorMessage={errorMessage}
-            formData={formData}
-            validateAge={validateAge}
-            change={handleChange}
-          />
-          {formData.productCode === "5" && (
-            <Select
-              labelName="Policy Plan"
-              formData={formData}
-              change={handleChange}
-              name="policyPlan"
-              value={formData.PolicyPlan}
-              optionList={policyPlanList}
-            />
-          )}
-          {formData.productCode === "5" && (
-            <Select
-              labelName="Policy Days"
-              formData={formData}
-              change={handleChange}
-              name="policyDays"
-              value={formData.policyDays}
-              optionList={policyDaysList}
-            />
-          )}
-
-          <Select
-            labelName="Sum Insured"
-            formData={formData}
-            change={handleChange}
-            name="sumInsured"
-            value={formData.sumInsured}
-            optionList={sumInsuredList}
-          />
-
-          {formData.productCode === "1" && (
-            <div className="col-md-12">
-              <div className="d-flex gap-2">
-                <CheckBox
-                  checked={isOptionalChecked}
-                  handle={handleOptionalCheck}
-                />
-                <p className="mt-3">
-                  Do you want optional cover? - Lump sum on diagnosis of cancer
-                </p>
-              </div>
-            </div>
-          )}
-          {formData.productCode === "2" && formData.sumInsured >= 1000000 && (
-            <div className="col-lg-12">
-              <p>Do you want STAR EXTRA PROTECT ?</p>
-              <div className="d-flex gap-2">
-                <CheckBox checked={isChecked} handle={handleCheck} />
-                <p className="mt-3">SECTION 1</p>
-              </div>
-              <p>1. Enhanced Room Rent</p>
-
-              <p>2. Claim Guard (Consumables cover)</p>
-
-              <p>3. Enhanced Limit for Modern Treatments</p>
-
-              <p>4. Enhanced Limit for Ayush Treatment</p>
-
-              <p>5. Home care treatment</p>
-
-              <p>6. Bonus Guard</p>
-            </div>
-          )}
-          {formData.productCode === "1" && isOptionalChecked && (
-            <Select
-              labelName="Lumpsum Cover"
-              formData={formData}
-              change={handleChange}
-              name="optionalSumInsured"
-              value={formData.optionalSumInsured}
-              optionList={optionalSumInsuredList}
-            />
-          )}
-
-          <Select
-            labelName="Payment Method"
-            formData={formData}
-            change={handleChange}
-            name="paymentPlan"
-            value={formData.paymentPlan}
-            optionList={paymentPlanList}
-          />
-          <Button type="submit" />
-        </form>
-        <div className="d-flex w-80 text-center justify-content-around">
-          {premium
-            ? Object.keys(premium).map((key) => {
-                return (
-                  <div className="mt-5" key={key}>
-                    {formData.productCode === "4" ? (
-                      <p className="text-secondary">Premium</p>
-                    ) : (
-                      <p className="text-secondary">{key} YEAR</p>
-                    )}
-
-                    <p className="border border-3 border-primary rounded p-2 text-center">
-                      ₹ {premium[key]}
-                    </p>
-                  </div>
-                );
-              })
-            : null}
-        </div>
-        <ToastContainer />
       </div>
+      <form onSubmit={handleSubmit} className="row m-3 gap-4">
+        <Select
+          labelName="Policy Type"
+          className="row m-3"
+          formData={formData}
+          change={handleChange}
+          optionList={policyTypeList}
+          name="policyType"
+          value={formData.policyType}
+        />
+        {((formData.policyType === "Floater" && formData.productCode !== "3") ||
+          (formData.productCode === "3" &&
+            formData.policyType === "Individual")) && (
+          <Select
+            labelName={adultLabel}
+            className="row m-3"
+            formData={formData}
+            change={handleChange}
+            name="adultCount"
+            value={formData.adultCount}
+            optionList={adultCountList}
+          />
+        )}
+        {formData.productCode === "3" && formData.policyType === "Floater" && (
+          <Select
+            labelName={adultLabel}
+            formData={formData}
+            className="row m-3"
+            change={handleChange}
+            name="adultCount"
+            value={formData.adultCount}
+            optionList={[2]}
+          />
+        )}
+
+        {formData.policyType === "Floater" && formData.productCode !== "3" && (
+          <Select
+            labelName="No Of Child"
+            className="row m-3"
+            formData={formData}
+            change={handleChange}
+            name="childCount"
+            value={formData.childCount}
+            optionList={childCount}
+          />
+        )}
+
+        <Age
+          errorClass={errorClass}
+          errorMessage={errorMessage}
+          formData={formData}
+          className="row m-3"
+          validateAge={validateAge}
+          change={handleChange}
+        />
+        {formData.productCode === "5" && (
+          <Select
+            labelName="Policy Plan"
+            formData={formData}
+            change={handleChange}
+            className="row m-3"
+            name="policyPlan"
+            value={formData.PolicyPlan}
+            optionList={policyPlanList}
+          />
+        )}
+        {formData.productCode === "5" && (
+          <Select
+            labelName="Policy Days"
+            formData={formData}
+            change={handleChange}
+            className="row m-3"
+            name="policyDays"
+            value={formData.policyDays}
+            optionList={policyDaysList}
+          />
+        )}
+
+        <Select
+          labelName="Sum Insured"
+          formData={formData}
+          change={handleChange}
+          name="sumInsured"
+          className="row m-3"
+          value={formData.sumInsured}
+          optionList={sumInsuredList}
+        />
+
+        {formData.productCode === "1" && (
+          <div className="col-md-12">
+            <div className="d-flex gap-2">
+              <CheckBox
+                checked={isOptionalChecked}
+                handle={handleOptionalCheck}
+              />
+              <p className="mt-3">
+                Do you want optional cover? - Lump sum on diagnosis of cancer
+              </p>
+            </div>
+          </div>
+        )}
+        {formData.productCode === "2" && formData.sumInsured >= 1000000 && (
+          <div className="col-lg-12">
+            <p>Do you want STAR EXTRA PROTECT ?</p>
+            <div className="d-flex gap-2">
+              <CheckBox checked={isChecked} handle={handleCheck} />
+              <p className="mt-3">SECTION 1</p>
+            </div>
+            <p>1. Enhanced Room Rent</p>
+
+            <p>2. Claim Guard (Consumables cover)</p>
+
+            <p>3. Enhanced Limit for Modern Treatments</p>
+
+            <p>4. Enhanced Limit for Ayush Treatment</p>
+
+            <p>5. Home care treatment</p>
+
+            <p>6. Bonus Guard</p>
+          </div>
+        )}
+        {formData.productCode === "1" && isOptionalChecked && (
+          <Select
+            className="row m-3"
+            labelName="Lumpsum Cover"
+            formData={formData}
+            change={handleChange}
+            name="optionalSumInsured"
+            value={formData.optionalSumInsured}
+            optionList={optionalSumInsuredList}
+          />
+        )}
+
+        <Select
+          labelName="Payment Method"
+          formData={formData}
+          change={handleChange}
+          name="paymentPlan"
+          value={formData.paymentPlan}
+          optionList={paymentPlanList}
+        />
+        <Button type="submit" />
+      </form>
+      <div className="d-flex w-80 text-center justify-content-around w-md-100">
+        {premium
+          ? Object.keys(premium).map((key) => {
+              return (
+                <div className="mt-3" key={key}>
+                  {formData.productCode === "4" ? (
+                    <p className="text-secondary">Premium</p>
+                  ) : (
+                    <p className="text-secondary">{key} YEAR</p>
+                  )}
+
+                  <p className="border_color">₹ {premium[key]}</p>
+                </div>
+              );
+            })
+          : null}
+      </div>
+      <ToastContainer />
     </div>
   );
 }

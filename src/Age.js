@@ -4,7 +4,7 @@ function Age({ errorClass, errorMessage, change, validateAge, formData }) {
   return (
     <div>
       <div className="d-flex col-md-5 position-relative">
-        <label className="text-nowrap  col-lg-5 text-center p-2 bg-primary text-white border border-info rounded">
+        <label className="text-nowrap  col-lg-5 text-center p-2  text-white border  rounded w-30 background_label">
           Age
         </label>
 

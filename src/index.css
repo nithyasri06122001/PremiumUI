@@ -6,8 +6,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgba(85, 12, 92, 0.5);
 }
-
+.background_label {
+  background-color: rgba(141, 9, 153, 0.726);
+}
+.border_color {
+  border-color: rgba(141, 9, 153, 0.726);
+  border: 30px;
+  border-radius: 5px;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
