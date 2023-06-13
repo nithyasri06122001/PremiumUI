@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-const sumInsuredListProduct1 = [
-  500000, 1000000, 1500000, 2000000, 2500000, 5000000, 10000000,
-];
+import React from "react";
+// const sumInsuredListProduct1 = [
+//   500000, 1000000, 1500000, 2000000, 2500000, 5000000, 10000000,
+// ];
 function WomenCare({
   submit,
   change,
