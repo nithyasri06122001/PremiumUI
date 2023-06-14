@@ -131,6 +131,8 @@ function Home() {
     if (formData.productCode !== "3") {
       setAdultLabel("No of Adult");
     }
+    setIsOptionalChecked(false);
+    setIsChecked(false);
   }, [formData.productCode, formData.policyType]);
 
   const validateAge = (e) => {
@@ -247,6 +249,7 @@ function Home() {
       return item <= formData.sumInsured && item < 5000000;
     });
     setoptionalSumInsuredList(optionalSum);
+    setIsChecked(false);
   }, [formData.sumInsured, isOptionalChecked]);
 
   useEffect(() => {
