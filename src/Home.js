@@ -78,7 +78,7 @@ function Home() {
     } else if (formData.adultCount === "2") {
       setChildCount(childCountList2);
     }
-  }, [formData.adultCount]);
+  }, [formData.adultCount, formData.productCode]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -434,17 +434,19 @@ function Home() {
           />
         )}
 
-        <Select
-          labelName="Payment Method"
-          formData={formData}
-          change={handleChange}
-          name="paymentPlan"
-          value={formData.paymentPlan}
-          optionList={paymentPlanList}
-        />
+        {formData.productCode !== "5" && (
+          <Select
+            labelName="Payment Method"
+            formData={formData}
+            change={handleChange}
+            name="paymentPlan"
+            value={formData.paymentPlan}
+            optionList={paymentPlanList}
+          />
+        )}
         <Button type="submit" />
       </form>
-      <div className="d-flex w-80 text-center justify-content-around w-md-100">
+      <div className="d-flex w-80 text-center justify-content-around">
         {premium
           ? Object.keys(premium).map((key) => {
               return (
