@@ -132,7 +132,7 @@ function Home() {
       setAdultLabel("No of Adult");
     }
     setIsOptionalChecked(false);
-    setIsChecked(false);
+    setFormData({ ...formData, starExtraProtect: "No" });
   }, [formData.productCode, formData.policyType]);
 
   const validateAge = (e) => {
@@ -206,7 +206,7 @@ function Home() {
     ) {
       return toast.error("Select Lumpsum cover");
     }
-    await fetch("http://localhost:8081/premium", {
+    await fetch("http://localhost:8082/premium", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
