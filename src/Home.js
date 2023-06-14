@@ -135,6 +135,17 @@ function Home() {
     setFormData({ ...formData, starExtraProtect: "No" });
   }, [formData.productCode, formData.policyType]);
 
+  useEffect(() => {
+    setPremium(null);
+    setFormData({
+      ...formData,
+      age: "",
+      sumInsured: "",
+      childCount: "",
+      policyType: "Individual",
+    });
+  }, [formData.productCode]);
+
   const validateAge = (e) => {
     if (e.target.value === "") {
       setErrorClass("danger");
