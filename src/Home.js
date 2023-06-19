@@ -81,7 +81,11 @@ function Home() {
   }, [formData.adultCount, formData.productCode]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+      productName: productList[formData.productCode],
+    });
   };
 
   useEffect(() => {
