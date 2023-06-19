@@ -81,7 +81,11 @@ function Home() {
   }, [formData.adultCount, formData.productCode]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+      productName: productList[formData.productCode],
+    });
   };
 
   useEffect(() => {
@@ -132,8 +136,19 @@ function Home() {
       setAdultLabel("No of Adult");
     }
     setIsOptionalChecked(false);
-    setIsChecked(false);
+    setFormData({ ...formData, starExtraProtect: "No" });
   }, [formData.productCode, formData.policyType]);
+
+  useEffect(() => {
+    setPremium(null);
+    setFormData({
+      ...formData,
+      age: "",
+      sumInsured: "",
+      childCount: "",
+      policyType: "Individual",
+    });
+  }, [formData.productCode]);
 
   const validateAge = (e) => {
     if (e.target.value === "") {
