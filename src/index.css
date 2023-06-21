@@ -6,8 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(85, 12, 92, 0.5);
-}
+ }
 .background_label {
   background-color: rgba(141, 9, 153, 0.726);
 }
@@ -24,3 +23,4 @@ code {
 .home {
   height: auto;
 }
+
