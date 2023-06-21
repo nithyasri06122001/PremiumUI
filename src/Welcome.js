@@ -1,8 +1,17 @@
 import React from 'react'
+import './Welcome.css'
 
 const Welcome = () => {
   return (
-    <div style={{backgroundImage:'./assets/bg-1'}}>Welcome</div>
+    <>
+    <div className='background'>
+        <div className='welcome'>
+        <h1>Welcome</h1>
+        <button className='btn-1'>GET QUOTE</button>
+        </div>
+     </div>
+    </>
+        
   )
 }
 

@@ -4,7 +4,7 @@ import Welcome from "./Welcome";
 
 function App() {
   return (
-    <div style={{backgroundImage:'url(./assets/bg-1.jpg)'}}>
+    <div>
       {/* <Home /> */}
       <Welcome/>
     </div>
