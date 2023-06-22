@@ -12,13 +12,14 @@ body::-webkit-scrollbar {
   display: none; }
 
 .btn-1 {
-  background-color: #0f1350;
+  background-color: #dd81af;
   border: none;
   border-radius: 10px;
   color: white;
   display: inline-block;
   transition: all .5s;
-  padding: 10px; }
+  padding: 10px;
+  margin: 10px; }
 
 .btn-1:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
