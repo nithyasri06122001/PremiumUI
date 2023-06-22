@@ -1,14 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;1,500&display=swap");
-body {
+/* body {
   background: linear-gradient(#3800e7, #8a15ff);
   background-repeat: no-repeat;
-  font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
-  font-family: "DM Mono", monospace;
+  font-size: calc(14px + (26 - 14) * ((100vw - 800px) / (1600 - 300)));
+  font-family: 'Poppins', sans-serif;
   font-weight: 300;
-  overflow: hidden;
-  text-align: center; 
-height: 100vh;
-}
+  overflow: scroll;
+  text-align: center; } */
 
 body::-webkit-scrollbar {
   display: none; }

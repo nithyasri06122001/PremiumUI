@@ -1,5 +1,4 @@
 import React from "react";
-import './select.css'
 
 const Select = ({ labelName, formData, change, optionList, value, name }) => {
   console.log(formData);

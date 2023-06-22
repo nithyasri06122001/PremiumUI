@@ -2,7 +2,7 @@ import React from "react";
 
 function Age({ errorClass, errorMessage, change, validateAge, formData }) {
   return (
-    <div className="d-flex position-relative mb-4">
+    <div className="d-flex position-relative mb-4 animation-1">
       <label className="text-nowrap col-lg-5 text-center p-2 background_label text-white border  rounded w-25">
         Age
       </label>

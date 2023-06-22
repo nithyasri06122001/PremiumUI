@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./Home";
-import Welcome from "./Welcome";
+import Landing from "./Landing";
 import { BrowserRouter,Routes,Route} from "react-router-dom";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
 <BrowserRouter>
 <Routes>
   <Route exact path="/"
-   element={ <Welcome/>}>
+   element={ <Landing />}>
     </Route> 
     <Route path="/quote"  element={ <Home/>}>
 

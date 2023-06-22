@@ -5,6 +5,7 @@ import Select from "./Select";
 import Age from "./Age";
 import CheckBox from "./CheckBox";
 import Button from "./Button";
+import Modal from "./Modal";
 const initialFormData = {
   productCode: "",
   productName: "",
@@ -306,9 +307,9 @@ function Home() {
   }, [formData.policyPlan]);
 
   return (
-    <div className="scroll-hide overflow-scroll bg-light bg-gradient m-md-5 border rounded d-inline-block " style={{height:'85vh'}}>
+    <div className="scroll-hide overflow-scroll bg-light bg-gradient m-md-5 border rounded d-inline-block " style={{height:'85vh',width:'75vw'}}>
       <div className="row m-5">
-        <p className="col-md">Quick Quote</p>
+        <p className="col-md paragraph">Quick Quote</p>
         <Select
           labelName="Product"
           className="row m-3"
@@ -464,23 +465,11 @@ function Home() {
         )}
         <Button type="submit" />
       </form>
-      <div className="d-flex w-80 text-center justify-content-around">
+      {/* <div className="d-flex w-80 text-center justify-content-around"> */}
         {premium
-          ? Object.keys(premium).map((key) => {
-              return (
-                <div className="mt-3" key={key}>
-                  {formData.productCode === "4" ? (
-                    <p className="text-secondary">Premium</p>
-                  ) : (
-                    <p className="text-secondary">{key} YEAR</p>
-                  )}
-
-                  <p className="border_color">₹ {premium[key]}</p>
-                </div>
-              );
-            })
+          ? <Modal premium={premium} formData={formData}/>
           : null}
-      </div>
+      {/* </div> */}
       <ToastContainer />
     </div>
   );
