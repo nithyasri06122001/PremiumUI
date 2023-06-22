@@ -5,7 +5,11 @@ body {
   font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
   font-family: "DM Mono", monospace;
   font-weight: 300;
+  overflow: scroll;
   text-align: center; }
+
+body::-webkit-scrollbar {
+  display: none; }
 
 .btn-1 {
   background-color: #0f1350;
@@ -74,11 +78,14 @@ h1 {
 h2 {
   font-size: 2em; }
 
+.background {
+  overflow: hidden;
+  height: 100vh; }
+
 .main {
-  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   flex-wrap: wrap;
   position: relative;
   justify-content: center;
