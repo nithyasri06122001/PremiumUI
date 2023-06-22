@@ -6,7 +6,9 @@ function Landing() {
   const navigate = useNavigate();
 
   const handleChange = () => {
-    navigate("/quote");
+    setTimeout(()=>{
+      navigate("/quote");
+    },500)
   };
   return (
     <div className=" background d-flex">

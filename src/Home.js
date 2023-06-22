@@ -6,6 +6,8 @@ import Age from "./Age";
 import CheckBox from "./CheckBox";
 import Button from "./Button";
 import Modal from "./Modal";
+import { css } from "@emotion/react";
+import { BeatLoader,HashLoader } from "react-spinners";
 const initialFormData = {
   productCode: "",
   productName: "",
@@ -21,6 +23,12 @@ const initialFormData = {
   policyPlan: "",
   policyDays: "",
 };
+
+const override = css`
+display: block;
+margin: 0 auto;
+color:red;
+`;
 
 const productList = {
   1: "Women Care",
@@ -68,7 +76,16 @@ function Home() {
   const [adultLabel, setAdultLabel] = useState("No of Adult");
   const [childCount, setChildCount] = useState([]);
   const [policyDaysList, setPolicyDaysList] = useState([]);
-
+  const [showModal,setShowModal]=useState(false)
+  
+  //Loading Spinner
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(()=>{
+    setInterval(() => {
+      setIsLoading(false) 
+    },1000)
+  },[])
+    
   useEffect(() => {
     if (formData.productCode === "4" && formData.adultCount === "1") {
       setChildCount([1, 2]);
@@ -232,6 +249,7 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         setPremium(data);
+        setShowModal(true);
       })
       .catch((error) => {
         console.log(error);
@@ -306,8 +324,18 @@ function Home() {
     }
   }, [formData.policyPlan]);
 
+  const modalHandle= ()=>{
+    setShowModal(false)
+  }
+
   return (
-    <div className="scroll-hide overflow-scroll bg-light bg-gradient m-md-5 border rounded d-inline-block " style={{height:'85vh',width:'75vw'}}>
+    <div className="scroll-hide overflow-scroll bg-light bg-gradient m-md-5 border rounded d-inline-block" style={{height:'85vh',width:'75vw'}}>
+      {isLoading?
+<div className="loader">
+<HashLoader css={override} size={50} />
+</div>:
+<>
+
       <div className="row m-5">
         <p className="col-md paragraph">Quick Quote</p>
         <Select
@@ -318,7 +346,7 @@ function Home() {
           optionList={productList}
           name="productCode"
           value={formData.productCode}
-        />
+          />
       </div>
       <form onSubmit={handleSubmit} className="row m-5 gap-4">
         <Select
@@ -342,30 +370,30 @@ function Home() {
             value={formData.adultCount}
             optionList={adultCountList}
           />
-        )}
+          )}
         {formData.productCode === "3" && formData.policyType === "Floater" && (
           <Select
-            labelName={adultLabel}
+          labelName={adultLabel}
             formData={formData}
             className="row m-3"
             change={handleChange}
             name="adultCount"
             value={formData.adultCount}
             optionList={[2]}
-          />
-        )}
+            />
+            )}
 
         {formData.policyType === "Floater" && formData.productCode !== "3" && (
           <Select
-            labelName="No Of Child"
-            className="row m-3"
-            formData={formData}
-            change={handleChange}
-            name="childCount"
-            value={formData.childCount}
-            optionList={childCount}
+          labelName="No Of Child"
+          className="row m-3"
+          formData={formData}
+          change={handleChange}
+          name="childCount"
+          value={formData.childCount}
+          optionList={childCount}
           />
-        )}
+          )}
 
         <Age
           errorClass={errorClass}
@@ -374,29 +402,29 @@ function Home() {
           className="row m-3"
           validateAge={validateAge}
           change={handleChange}
-        />
+          />
         {formData.productCode === "5" && (
           <Select
-            labelName="Policy Plan"
-            formData={formData}
+          labelName="Policy Plan"
+          formData={formData}
             change={handleChange}
             className="row m-3"
             name="policyPlan"
             value={formData.PolicyPlan}
             optionList={policyPlanList}
-          />
-        )}
+            />
+            )}
         {formData.productCode === "5" && (
           <Select
-            labelName="Policy Days"
-            formData={formData}
-            change={handleChange}
-            className="row m-3"
+          labelName="Policy Days"
+          formData={formData}
+          change={handleChange}
+          className="row m-3"
             name="policyDays"
             value={formData.policyDays}
             optionList={policyDaysList}
           />
-        )}
+          )}
 
         <Select
           labelName="Sum Insured"
@@ -450,29 +478,31 @@ function Home() {
             name="optionalSumInsured"
             value={formData.optionalSumInsured}
             optionList={optionalSumInsuredList}
-          />
-        )}
+            />
+            )}
 
         {formData.productCode !== "5" && (
           <Select
-            labelName="Payment Method"
-            formData={formData}
-            change={handleChange}
-            name="paymentPlan"
-            value={formData.paymentPlan}
-            optionList={paymentPlanList}
+          labelName="Payment Method"
+          formData={formData}
+          change={handleChange}
+          name="paymentPlan"
+          value={formData.paymentPlan}
+          optionList={paymentPlanList}
           />
-        )}
+          )}
         <Button type="submit" />
       </form>
-      {/* <div className="d-flex w-80 text-center justify-content-around"> */}
-        {premium
-          ? <Modal premium={premium} formData={formData}/>
+      
+        {(premium && showModal)
+          ? <Modal premium={premium} formData={formData} modalHandle={modalHandle}/>
           : null}
-      {/* </div> */}
       <ToastContainer />
+      </>
+    }
     </div>
   );
 }
 
 export default Home;
+
