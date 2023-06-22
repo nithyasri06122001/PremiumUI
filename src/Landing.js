@@ -1,7 +1,13 @@
 import React from "react";
 import "./Landing.css";
+import { useNavigate } from "react-router-dom";
 
 function Landing() {
+  const navigate = useNavigate();
+
+  const handleChange = () => {
+    navigate("/quote");
+  };
   return (
     <div className=" background d-flex">
     <div className="col-md-7  background-container">
@@ -50,7 +56,7 @@ function Landing() {
                 </p>
               </div>
               <div>
-                <button className="">
+                <button onClick={handleChange}>
                     Get Your Quote
                 </button>
               </div>
