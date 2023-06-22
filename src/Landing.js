@@ -44,13 +44,13 @@ function Landing() {
               <div>
                 <h4 className="card-header">Star Health Insurance</h4>
               </div>
-              <div>
-                <p className="card-body">
+              <div className="">
+                <p>
                     Get Your Premium
                 </p>
               </div>
               <div>
-                <button className="btn">
+                <button className="">
                     Get Your Quote
                 </button>
               </div>
