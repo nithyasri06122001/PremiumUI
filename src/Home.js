@@ -306,7 +306,7 @@ function Home() {
   }, [formData.policyPlan]);
 
   return (
-    <div className="shadow  bg-light bg-gradient m-md-5 border rounded d-block ">
+    <div className="overflow-scroll bg-light bg-gradient m-md-5 border rounded d-inline-block " style={{height:'85vh'}}>
       <div className="row m-3">
         <p className="col-md">Quick Quote</p>
         <Select
