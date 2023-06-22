@@ -63,10 +63,25 @@
 
 
   }
-  .card h1{
-    color:green;
-
+  .card h4{
+    color:white;
+    cursor:pointer;
   }
-  
+  .card p{
+    font-weight: bold;
+  }
+  .card button{
+    background-color: rgb(43, 48, 48);
+    border-radius: 8px;
+    padding:0.5em;
+    transition: transform ease-in 0.2s;
+    border:none;
+    color: white;
+  }
+  .card button:hover{
+    background-color:rgb(94, 92, 92);
+    transform: scale(1.2);
+   
+  }
   
   
