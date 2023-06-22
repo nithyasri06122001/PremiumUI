@@ -306,8 +306,8 @@ function Home() {
   }, [formData.policyPlan]);
 
   return (
-    <div className="overflow-scroll bg-light bg-gradient m-md-5 border rounded d-inline-block " style={{height:'85vh'}}>
-      <div className="row m-3">
+    <div className="scroll-hide overflow-scroll bg-light bg-gradient m-md-5 border rounded d-inline-block " style={{height:'85vh'}}>
+      <div className="row m-5">
         <p className="col-md">Quick Quote</p>
         <Select
           labelName="Product"
@@ -319,7 +319,7 @@ function Home() {
           value={formData.productCode}
         />
       </div>
-      <form onSubmit={handleSubmit} className="row m-3 gap-4">
+      <form onSubmit={handleSubmit} className="row m-5 gap-4">
         <Select
           labelName="Policy Type"
           className="row m-3"

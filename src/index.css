@@ -24,3 +24,7 @@ code {
   height: auto;
 }
 
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
