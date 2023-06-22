@@ -29,7 +29,7 @@ function Landing() {
       </div>
     </div>
       <div className="col col-md-5 content align-items-center d-flex justify-content-center">
-        <div className="card gap-5 font-">
+        <div className="card gap-5">
               <div className="">
                 <h4 className="text-uppercase fw-bold">Star Health Insurance</h4>
               </div>
