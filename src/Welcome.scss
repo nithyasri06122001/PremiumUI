@@ -10,8 +10,8 @@ $magenta: #d000c5;
 body {
   background: linear-gradient($blue, $purple);
   background-repeat: no-repeat;
-  font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
-  font-family: "DM Mono", monospace;
+  font-size: calc(14px + (26 - 14) * ((100vw - 800px) / (1600 - 300)));
+  font-family: 'Poppins', sans-serif;
   font-weight: 300;
    overflow:scroll;
   text-align: center;
@@ -23,13 +23,14 @@ body::-webkit-scrollbar{
 
 
 .btn-1{
-  background-color: rgb(15, 19, 80);
+  background-color: rgb(221, 129, 175);
   border: none;
   border-radius: 10px; 
   color: white;
   display: inline-block;
   transition:all .5s;
   padding:10px;
+  margin:10px;
 }
 .btn-1:hover{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19) ;

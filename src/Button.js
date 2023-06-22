@@ -5,7 +5,7 @@ function Button({ type }) {
     <div className="m-3 text-center">
       <button
         className="btn btn-secondary text-white pe-3 ps-3 background_label border-0"
-        type={type}
+        type={type} data-toggle="modal" data-target="myModal"
       >
         Get Quote
       </button>
