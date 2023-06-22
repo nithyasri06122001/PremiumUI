@@ -29,9 +29,20 @@ function Landing() {
       </div>
     </div>
       <div className="col col-md-5 content align-items-center d-flex justify-content-center">
-        <div className="card gap-5">
-              <div className="">
-                <h4 className="text-uppercase fw-bold">Star Health Insurance</h4>
+        <div className="card text-wrap gap-5">
+          <div>
+
+          <div className="sm-avatar">
+            <a href="https://atom.starhealth.in/login">
+              <img
+                src="https://play-lh.googleusercontent.com/aBHF38bONKHsIkqBp8oQJ0JDh71JZ3mG4mRRHZ_sr5TY8_d2sJejvWFqmBOqfUZJ3AY"
+                alt="star health"
+              ></img>
+            </a>
+          </div>
+          </div>
+              <div>
+                <h4 className="card-title">Star Health Insurance</h4>
               </div>
               <div className="">
                 <p>

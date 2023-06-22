@@ -1,87 +1,116 @@
-.background{
-    background-image: linear-gradient(rgb(207, 204, 6),rgb(243, 220, 220));
+.background {
+  background-image: linear-gradient(rgb(207, 204, 6), rgb(243, 220, 220));
+}
+@media screen and (max-width: 767px) {
+    .background{
+        background-image: linear-gradient(rgb(105, 155, 248),rgb(166, 65, 212));
+    }
+    
+}
+.background-container {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
 
-.background-container {
-    height: 100vh; 
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .background-image {
-    width: 100%;
-    height: 100%;
-    background-image: url('https://cdn.pixabay.com/photo/2017/08/30/07/52/money-2696219_1280.jpg');
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    clip-path: url(#clipPath); 
-  
-  }
-  .content{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
+.background-image {
+  width: 100%;
+  height: 100%;
+  background-image: url("https://cdn.pixabay.com/photo/2017/08/30/07/52/money-2696219_1280.jpg");
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  clip-path: url(#clipPath);
+}
+.content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
-  .avatar {
-    margin-top: 50px;
-    width: 100px;
-    position:absolute;
+.avatar {
+  margin-top: 50px;
+  width: 100px;
+  position: absolute;
+  z-index: 1;
+  left: 50px;
+  height: 100px;
+  box-sizing: border-box;
+  border: 0.5px white solid;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+  transform: translateY(0px);
+  animation: float 5s ease-in-out infinite;
+}
+.avatar img {
+  width: 100%;
+  height: auto;
+}
+
+@keyframes float {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
+  }
+  50% {
+    box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
+    transform: translatey(-10px);
+  }
+  100% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
+  }
+}
+
+.card {
+  width: 75%;
+  align-items: center;
+  height: 75%;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+.card h4 {
+  color: white;
+  cursor: pointer;
+}
+.card p {
+  font-weight: bold;
+}
+.card button {
+  background-color: rgb(43, 48, 48);
+  border-radius: 8px;
+  padding: 0.5em;
+  transition: transform ease-in 0.2s;
+  border: none;
+  color: white;
+}
+.card button:hover {
+  background-color: rgb(94, 92, 92);
+  transform: scale(1.2);
+}
+.sm-avatar {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .sm-avatar {
+    display: inline-block;
+    height:70px;
+    width:70px;
     z-index: 1;
-    left:50px;
-    height: 100px;
     box-sizing: border-box;
     border: 0.5px white solid;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-    transform: translateY(0px);
-    animation: float 5s ease-in-out infinite; }
-    .avatar img {
-      width: 100%;
-      height: auto; }
+    animation: float 5s ease-in-out infinite;
+    align-items: center;
+  }
+}
 
-      @keyframes float {
-        0% {
-          box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-          transform: translatey(0px); }
-        50% {
-          box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
-          transform: translatey(-10px); }
-        100% {
-          box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-          transform: translatey(0px); } }
-      
-  .card{
-     width:75%;
-     align-items: center;
-     height:75%;
-     justify-content: center;
-     background-color: rgba(0, 0, 0, 0.3);
-     border-radius: 10px;
-
-
-  }
-  .card h4{
-    color:white;
-    cursor:pointer;
-  }
-  .card p{
-    font-weight: bold;
-  }
-  .card button{
-    background-color: rgb(43, 48, 48);
-    border-radius: 8px;
-    padding:0.5em;
-    transition: transform ease-in 0.2s;
-    border:none;
-    color: white;
-  }
-  .card button:hover{
-    background-color:rgb(94, 92, 92);
-    transform: scale(1.2);
-   
-  }
-  
-  
+.sm-avatar img {
+  width: 100%;
+  height: auto;
+}
