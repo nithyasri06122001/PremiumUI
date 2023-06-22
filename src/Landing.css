@@ -1,9 +1,11 @@
+.background{
+    background-image: linear-gradient(rgb(207, 204, 6),rgb(243, 220, 220));
+}
+
 .background-container {
-    width: 55%; 
     height: 100vh; 
     position: relative;
     overflow: hidden;
-    background-color: aliceblue;
   }
   
   .background-image {
@@ -17,8 +19,6 @@
   
   }
   .content{
-    background-color: aliceblue;
-    width: 45%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -26,15 +26,18 @@
 
   .avatar {
     margin-top: 50px;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    position:absolute;
+    z-index: 1;
+    left:50px;
+    height: 100px;
     box-sizing: border-box;
-    border: 2px white solid;
+    border: 0.5px white solid;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-    transform: translatey(0px);
-    animation: float 6s ease-in-out infinite; }
+    transform: translateY(0px);
+    animation: float 5s ease-in-out infinite; }
     .avatar img {
       width: 100%;
       height: auto; }
@@ -45,12 +48,25 @@
           transform: translatey(0px); }
         50% {
           box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
-          transform: translatey(-20px); }
+          transform: translatey(-10px); }
         100% {
           box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
           transform: translatey(0px); } }
       
-  
+  .card{
+     width:75%;
+     align-items: center;
+     height:75%;
+     justify-content: center;
+     background-color: rgba(0, 0, 0, 0.3);
+     border-radius: 10px;
+
+
+  }
+  .card h1{
+    color:green;
+
+  }
   
   
   

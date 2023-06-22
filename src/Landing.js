@@ -3,8 +3,16 @@ import "./Landing.css";
 
 function Landing() {
   return (
-    <div className="d-flex">
-    <div className="background-container">
+    <div className=" background d-flex">
+    <div className="col-md-7  background-container">
+    <div className="avatar">
+            <a href="https://atom.starhealth.in/login">
+              <img
+                src="https://play-lh.googleusercontent.com/aBHF38bONKHsIkqBp8oQJ0JDh71JZ3mG4mRRHZ_sr5TY8_d2sJejvWFqmBOqfUZJ3AY"
+                alt="star health"
+              ></img>
+            </a>
+          </div>
       <div className="background-image">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -20,15 +28,23 @@ function Landing() {
         </svg>
       </div>
     </div>
-      <div className="content">
-       <div className="avatar">
-            <a href="https://atom.starhealth.in/login">
-              <img
-                src="https://play-lh.googleusercontent.com/aBHF38bONKHsIkqBp8oQJ0JDh71JZ3mG4mRRHZ_sr5TY8_d2sJejvWFqmBOqfUZJ3AY"
-                alt="star health"
-              ></img>
-            </a>
-          </div>
+      <div className="col col-md-5 content align-items-center d-flex justify-content-center">
+        <div className="card text-wrap gap-5">
+              <div>
+                <h1>Star Health Insurance</h1>
+              </div>
+              <div>
+                <p>
+                    Get Your Premium
+                </p>
+              </div>
+              <div>
+                <button className="btn">
+                    Get Your Quote
+                </button>
+              </div>
+        </div>
+     
       </div>
       </div>
   );
