@@ -67,6 +67,34 @@
     color:green;
 
   }
+  .sm-avatar{  
+    display: none;
+  }
   
+  
+  @media screen and (max-width: 767px) {
+    .sm-avatar {
+      display: inline-block;
+      top: 30px;
+    width: 100px;
+    position:absolute;
+    z-index: 1;
+    left:37%;
+    height: 100px;
+    box-sizing: border-box;
+    border: 0.5px white solid;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translateY(0px);
+    animation: float 5s ease-in-out infinite; 
+    }
+  }
+  
+  .sm-avatar img{
+    width: 100%;
+    height: auto;
+
+  }
   
   
