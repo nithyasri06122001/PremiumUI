@@ -10,13 +10,11 @@ $magenta: #d000c5;
 body {
   background: linear-gradient($blue, $purple);
   background-repeat: no-repeat;
-  height:100vh;
-  width:100vw;
   font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
   font-family: "DM Mono", monospace;
   font-weight: 300;
-  overflow: hidden;
-  color: white;
+  // overflow: hidden;
+  // color: white;
   text-align: center;
 }
 
@@ -95,7 +93,7 @@ h2 {
 }
 
 .main {
-  height:auto;
+  height:100vh;
   display: flex;
   flex-direction: column;
   overflow:hidden;
