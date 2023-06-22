@@ -20,8 +20,15 @@ function Landing() {
         </svg>
       </div>
     </div>
-      <div>
-       <p>hi</p>
+      <div className="content">
+       <div className="avatar">
+            <a href="https://atom.starhealth.in/login">
+              <img
+                src="https://play-lh.googleusercontent.com/aBHF38bONKHsIkqBp8oQJ0JDh71JZ3mG4mRRHZ_sr5TY8_d2sJejvWFqmBOqfUZJ3AY"
+                alt="star health"
+              ></img>
+            </a>
+          </div>
       </div>
       </div>
   );
