@@ -2,13 +2,9 @@
 body {
   background: linear-gradient(#3800e7, #8a15ff);
   background-repeat: no-repeat;
-  height: 100vh;
-  width: 100vw;
   font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
   font-family: "DM Mono", monospace;
   font-weight: 300;
-  overflow: hidden;
-  color: white;
   text-align: center; }
 
 .btn-1 {
@@ -79,7 +75,7 @@ h2 {
   font-size: 2em; }
 
 .main {
-  height: auto;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
