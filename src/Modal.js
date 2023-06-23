@@ -6,6 +6,7 @@ const override = css`
 display: block;
 margin: 0 auto;
 color:red;
+border_color:red;
 `;
 
 function Modal({premium,formData,modalHandle}) {
@@ -35,20 +36,20 @@ modalHandle();
 
     {premium ?  Object.keys(premium).map((key) => {
       return (
-    <div className="mt-3 d-flex align-items-center justify-content-center row" key={key}>
+    <div className="d-flex align-items-center row " key={key}>
       {formData.productCode === "4" ? (
-        <p className="text-secondary">Premium</p>
+        <p className="text-secondary text-align-center"></p>
         ) : (
           <p className="text-secondary">{key} YEAR</p>
           )}
 
-      <p className="border_color premium">₹ {premium[key]}</p>
+      <p className="">₹ {premium[key]}</p>
     </div>
   );
 }):null}
 </div>
     <footer>
-<button className='btn btn-secondary'  onClick={handle} >Close</button>
+<button className='btn btn-secondary mt-50'  onClick={handle} >Close</button>
     </footer>
     </div>}
     </div>
