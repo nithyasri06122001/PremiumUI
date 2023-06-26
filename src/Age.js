@@ -2,13 +2,13 @@ import React from "react";
 
 function Age({ errorClass, errorMessage, change, validateAge, formData }) {
   return (
-    <div className="d-flex position-relative mb-4 animation-1">
-      <label className="text-nowrap col-lg-5 text-center p-2 background_label text-white border  rounded w-25">
+    <div className="col-md-6 d-flex mb-3 animation-1">
+      <label className="text-nowrap col-3 text-center p-2 me-2 text-white border rounded w-25 background_label">
         Age
       </label>
 
       <input
-        className={`w-50 border border-${errorClass} rounded`}
+        className={`form-control bg-white border border-${errorClass} rounded w-60`}
         type="number"
         name="age"
         value={formData.age}

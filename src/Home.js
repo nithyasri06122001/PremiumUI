@@ -329,7 +329,7 @@ function Home() {
   }
 
   return (
-    <div className="scroll-hide overflow-scroll bg-light bg-gradient m-md-5 border rounded d-inline-block" style={{height:'85vh',width:'75vw'}}>
+    <div className="scroll-hide overflow-scroll bg-light bg-gradient m-5 border rounded d-inline-block" style={{height:'85vh',width:'90vw'}}>
       {isLoading?
 <div className="loader">
 <HashLoader css={override} size={50} />
@@ -348,7 +348,7 @@ function Home() {
           value={formData.productCode}
           />
       </div>
-      <form onSubmit={handleSubmit} className="row m-5 gap-4">
+      <form onSubmit={handleSubmit} className="row m-5 g-4">
         <Select
           labelName="Policy Type"
           className="row m-3"
