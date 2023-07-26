@@ -1,7 +1,7 @@
 import React from "react";
 
 const Select = ({ labelName, formData, change, optionList, value, name }) => {
-  console.log(formData);
+  // console.log(formData);
   return (
     <div className="col-md-6 d-flex  mb-3 animation-1">
       <label className="text-nowrap col-3 text-center p-2 me-2 text-white border rounded w-25 background_label">

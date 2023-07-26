@@ -8,6 +8,9 @@ import Button from "./Button";
 import Modal from "./Modal";
 import { css } from "@emotion/react";
 import { BeatLoader,HashLoader } from "react-spinners";
+
+
+
 const initialFormData = {
   productCode: "",
   productName: "",
@@ -22,8 +25,15 @@ const initialFormData = {
   optionalSumInsured: "",
   policyPlan: "",
   policyDays: "",
+  zone:""
 };
 
+
+const zoneA=['Delhi', 'New Delhi', 'Faridabad', 'Gurugram', 'Shahdara', 'Ahmedabad', 'Surat', 'Vadodara', 'Gautam Buddha Nagar', 'Ghaziabad', 'Mewat', 'Alwar', 'Baghpat', 'Bhiwani', 'Bulandshahar', 'Fatehabad', 
+  'Hisar',' jhajjar', 'Jind', 'Kaithal', 'Karnal', 'Kurukshetra', 'Mahendragarh', 'Meerut', 'Muzaffar nagar', 'Palwal', 'Panchsheel Nagar', 'Panipat', 'Rewari', 'Rohtak', 'Saharanpur', 'Sirsa', 'Sonipat']
+
+const zoneB=['Mumbai','suburban','Gujarat', 'Thane', 'Palghar','  Raigarh']
+const zoneC=['Chennai', 'Ernakulam', 'Thiruvananthapuram', 'Bengaluru', 'Chengalpattu', 'Kanchipuram', 'Nashik', 'Pune', 'Tiruvallur', 'Hyderabad', 'Kollam', 'Wayanad', 'Indore', 'K V Ranga Reddy','Medchal', 'Malkajgiri', 'Ahmed Nagar','Gwalior']
 const override = css`
 display: block;
 margin: 0 auto;
@@ -36,6 +46,7 @@ const productList = {
   3: "Senior Citizen's Red Carpet",
   4: "Star Micro Rural and Farmers Care",
   5: "Star Hospital Cash",
+  6: "Family Health Optima"
 };
 const policyTypeList = ["Individual", "Floater"];
 const adultCountList = [1, 2];
@@ -52,6 +63,9 @@ const sumInsuredListProduct3 = [100000, 200000, 300000, 400000, 500000, 750000];
 
 const sumInsuredListProduct3F = [1000000, 1500000, 2000000, 2500000];
 const sumInsuredListProduct5 = [1000, 2000, 3000];
+const sumInsuredListProduct6 = [
+  500000, 1000000, 1500000, 2000000, 2500000, 5000000, 10000000,
+];
 
 const paymentPlanList = [
   "Full Payment",
@@ -77,6 +91,13 @@ function Home() {
   const [childCount, setChildCount] = useState([]);
   const [policyDaysList, setPolicyDaysList] = useState([]);
   const [showModal,setShowModal]=useState(false)
+  const [pinCode,setPinCode]=useState("");
+  const [location,setLocation]=useState(null);
+ 
+
+
+
+
   
   //Loading Spinner
   const [isLoading, setIsLoading] = useState(true);
@@ -143,6 +164,9 @@ function Home() {
       case "5":
         setSumInsuredList(sumInsuredListProduct5);
         break;
+        case "6":
+          setSumInsuredList(sumInsuredListProduct6);
+          break;
 
       default:
         setSumInsuredList([]);
@@ -167,6 +191,14 @@ function Home() {
       policyType: "Individual",
     });
   }, [formData.productCode]);
+
+  const validatePinCode=(e)=>{
+
+    // if(e.target.value.length>0){
+    //   console.log(e.target.value)
+    // }
+
+  }
 
   const validateAge = (e) => {
     if (e.target.value === "") {
@@ -198,6 +230,7 @@ function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData)
 
     if (formData.productCode === "") {
       return toast.error("Select any product");
@@ -239,7 +272,8 @@ function Home() {
     ) {
       return toast.error("Select Lumpsum cover");
     }
-    await fetch("http://localhost:8082/premium", {
+    // console.log(formData);
+    await fetch("http://localhost:8/premium", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -252,7 +286,7 @@ function Home() {
         setShowModal(true);
       })
       .catch((error) => {
-        console.log(error);
+        console.log("error");
       });
   };
 
@@ -327,7 +361,60 @@ function Home() {
   const modalHandle= ()=>{
     setShowModal(false)
   }
-
+const  pinCodeChange=async(e)=>{
+  setPinCode(e.target.value);
+  if(e.target.value.length===6){
+    await fetch(`https://vo-uatapi.starhealth.in/v5/location/search/location?pincode=${e.target.value}`, {
+      method: "GET"
+    })
+      .then((response) => response.json())
+      .then((data) => {
+      setLocation(data);
+     console.log(data);
+      let len=data.length
+      for(let i=0;i<len;i++){
+        // console.log(data[i])
+        if(zoneA.includes(data[i].city ||data[i].district||data[i].state||data[i].subDistrict)){
+          setFormData({
+            ...formData,
+            zone:'A',
+          });
+          console.log(data[i].city,data[i].district,data[i].state||data[i].subDistrict)
+          break;
+      }
+      else if(zoneB.includes(data[i].city ||data[i].district||data[i].state||data[i].subDistrict)){
+        setFormData({
+          ...formData,
+          zone:'B',
+        });
+        console.log(data[i].city,data[i].district,data[i].state||data[i].subDistrict)
+        break;
+    }
+    else if(zoneC.includes(data[i].city ||data[i].district||data[i].state||data[i].subDistrict)){
+      setFormData({
+        ...formData,
+        zone:'C',
+      });
+      console.log(data[i].city,data[i].district,data[i].state||data[i].subDistrict)
+      break;
+  }
+  else if(formData.zone !=='A'||formData.zone !=='B'||formData.zone !=='C'){
+    setFormData({
+      ...formData,
+      zone:'D',
+    });
+}
+    }
+      
+      })
+      .catch((error) => {
+        console.log("location error");
+      });
+    }  
+  }
+  useEffect(() => {  
+    console.log(formData.zone)
+  }, [formData.zone,pinCode])
   return (
     <div className="scroll-hide overflow-scroll bg-light bg-gradient m-5 border rounded d-inline-block" style={{height:'85vh',width:'90vw'}}>
       {isLoading?
@@ -396,13 +483,28 @@ function Home() {
           )}
 
         <Age
+        label="Age"
+        name="age"
           errorClass={errorClass}
           errorMessage={errorMessage}
-          formData={formData}
+          formData={formData.age}
           className="row m-3"
-          validateAge={validateAge}
+          validate={validateAge}
           change={handleChange}
           />
+
+{formData.productCode === "6" && (<Age
+          label="Pin Code"
+          name="pinCode"
+          errorClass={errorClass}
+          errorMessage={errorMessage}
+          formData={pinCode}
+          className="row m-3"
+          validate={validatePinCode}
+          change={pinCodeChange}
+          />)}
+
+
         {formData.productCode === "5" && (
           <Select
           labelName="Policy Plan"
